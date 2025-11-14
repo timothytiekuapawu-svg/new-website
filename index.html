@@ -1,78 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SmartFix electricals</title>
-<link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFix Electricals</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- Welcome Page -->
-<section id="welcomePage" class="full-screen active">
-  <video autoplay muted loop id="welcomeVideo" class="full-screen-video">
+<section id="welcomePage" class="fullScreen">
+  <video autoplay muted loop id="welcomeVideo">
+    <!-- Insert your video source here -->
     <source src="welcome.mp4" type="video/mp4">
-    Your browser does not support HTML video.
   </video>
-  <div class="welcome-overlay">
+  <div class="overlay"></div>
+  <div class="welcomeContent">
     <h1>SmartFix Electricals</h1>
     <button id="startBooking" class="btn btn-primary">Welcome</button>
   </div>
 </section>
 
 <!-- Booking Page -->
-<main id="bookingPage" class="full-screen">
-  <!-- Slideshow -->
-  <div class="slideshow-container">
-    <img src="slide1.jpg" class="slide active">
-    <img src="slide2.jpg" class="slide">
-    <img src="slide3.jpg" class="slide">
+<main id="bookingPage" class="fullScreen" style="display:none;">
+  <div id="slideshow" class="slideshow">
+    <!-- Insert your images here -->
+    <img src="IMAGE1.jpg" class="slide active">
+    <img src="IMAGE2.jpg" class="slide">
+    <img src="IMAGE3.jpg" class="slide">
+    <img src="IMAGE4.jpg" class="slide">
   </div>
 
-  <div class="booking-container">
-    <header>
-      <h1>SmartFix Electricals</h1>
-    </header>
+  <div class="companyName">SmartFix Electricals</div>
 
-    <div class="progress-bar">
-      <div id="prog" style="width:33%"></div>
+  <!-- Step 1 -->
+  <section id="step1" class="step active">
+    <div class="left">
+      <label for="user_name">Full Name</label>
+      <input id="user_name" type="text" placeholder="e.g., John Doe">
+      <label for="user_phone">Phone Number</label>
+      <input id="user_phone" type="tel" placeholder="+233 54 389 9210">
+      <label for="maintenance_type">Type of Maintenance</label>
+      <select id="maintenance_type">
+        <option value="">-- Select --</option>
+        <option>Wiring fault / repair</option>
+        <option>Rewiring / new connection</option>
+        <option>Lighting / fan installation</option>
+        <option>Socket outlet installation</option>
+        <option>Fuse box / circuit breaker</option>
+        <option>Generator / inverter</option>
+        <option>Appliance connection</option>
+        <option>Solar PV / battery system</option>
+        <option>Other</option>
+      </select>
     </div>
+    <div class="right">
+      <button id="next1" class="btn btn-primary">Next ➡</button>
+    </div>
+  </section>
 
-    <!-- Step 1 -->
-    <section id="step1" class="step active">
-      <div class="form-left">
-        <label for="user_name">Full Name</label>
-        <input id="user_name" name="user_name" type="text" placeholder="John Doe">
-
-        <label for="user_phone">Phone Number</label>
-        <input id="user_phone" name="user_phone" type="tel" placeholder="+233 54 389 9210">
-
-        <label for="maintenance_type">Type of Maintenance</label>
-        <select id="maintenance_type" name="maintenance_type">
-          <option value="">-- Select --</option>
-          <option>Wiring fault / repair</option>
-          <option>Rewiring / new connection</option>
-          <option>Lighting / fan installation</option>
-          <option>Socket outlet installation</option>
-          <option>Fuse box / circuit breaker</option>
-          <option>Generator / inverter</option>
-          <option>Appliance connection</option>
-          <option>Solar PV / battery system</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="form-right">
-        <button type="button" id="next1" class="btn btn-primary">Next ➡</button>
-        <a id="quickwhats" href="#" class="btn btn-whatsapp" target="_blank">💬 Quick WhatsApp</a>
-      </div>
-    </section>
-
-    <!-- Step 2 -->
-    <section id="step2" class="step">
+  <!-- Step 2 -->
+  <section id="step2" class="step">
+    <div class="left">
       <label for="user_email">Email</label>
       <input id="user_email" type="email" placeholder="you@example.com">
-
+      <label for="contact_address">Contact Address</label>
+      <input id="contact_address" type="text" placeholder="Your address">
+    </div>
+    <div class="right">
       <label for="audience_level">Priority Level</label>
       <select id="audience_level">
         <option value="">-- Select Priority --</option>
@@ -80,52 +75,61 @@
         <option>Medium (2–3 Days)</option>
         <option>High (Urgent)</option>
       </select>
-
-      <label for="contact_address">Contact Address</label>
-      <input id="contact_address" type="text" placeholder="Your address">
-
-      <label for="preferred_datetime">Preferred Date & Time</label>
-      <input id="preferred_datetime" type="datetime-local">
-
       <label for="message">Describe the Problem</label>
       <textarea id="message" placeholder="Describe issue..."></textarea>
+      <label for="preferred_datetime">Preferred Date & Time</label>
+      <input id="preferred_datetime" type="datetime-local">
+      <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
+    </div>
+    <div class="quickWhatsAppContainer">
+      <a href="#" id="quickwhats" class="whatsapp" target="_blank">💬 Quick WhatsApp</a>
+    </div>
+  </section>
 
-      <div class="buttons">
-        <button id="back1" class="btn btn-ghost">⬅ Back</button>
-        <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
-      </div>
-    </section>
+  <!-- Step 3: Review -->
+  <section id="review" class="step">
+    <div id="reviewBox"></div>
+    <div class="reviewButtons">
+      <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
+      <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
+      <div id="sending" class="spinner" style="display:none;"></div>
+    </div>
+  </section>
 
-    <!-- Step 3 / Review -->
-    <section id="review" class="step">
-      <div id="reviewBox"></div>
-      <div class="buttons">
-        <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
-        <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
-        <div id="sending" class="spinner" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- Footer Info -->
-    <footer>
-      <div id="about">About Us</div>
-      <div id="electrician">What an Electrician Does</div>
-      <div id="contact">Contact Us</div>
-    </footer>
+  <!-- Result Modal -->
+  <div id="resultPanel" class="result-panel">
+    <div class="result-card">
+      <h2 id="resultTitle"></h2>
+      <p id="resultMessage"></p>
+      <p id="countdown"></p>
+      <button class="btn btn-ghost" id="manualBackBtn">🏠 Back to Home</button>
+    </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      <h3>About Us</h3>
+      <p>SmartFix electricals provides fast, trusted, and professional electrical services.</p>
+    </div>
+    <div class="footer-center">
+      <h3>What an Electrician Does</h3>
+      <ul>
+        <li>Repair wiring faults</li>
+        <li>Install lights, sockets, and fans</li>
+        <li>Fuse box & circuit breaker services</li>
+        <li>Generators & Solar PV</li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>Contact Us</h3>
+      <p>Phone: +233 54 389 9210</p>
+      <p>Email: timothytiekuapawu@gmail.com</p>
+    </div>
+  </footer>
 </main>
 
-<!-- Result Modal -->
-<div id="resultPanel" class="result-panel">
-  <div class="result-card">
-    <h2 id="resultTitle"></h2>
-    <p id="resultMessage"></p>
-    <p id="countdown">Returning home in <span id="seconds">10</span>s</p>
-    <button class="btn btn-ghost" onclick="resetToHome()">🏠 Back to Home</button>
-  </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="js/script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
