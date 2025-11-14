@@ -1,0 +1,145 @@
+/* FULLSCREEN SLIDESHOW */
+.slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: zoomfade 20s infinite;
+  opacity: 0;
+}
+
+/* INSERT YOUR OWN IMAGES HERE */
+.s1 { background-image: url('IMAGE1.jpg'); animation-delay: 0s; }
+.s2 { background-image: url('IMAGE2.jpg'); animation-delay: 5s; }
+.s3 { background-image: url('IMAGE3.jpg'); animation-delay: 10s; }
+.s4 { background-image: url('IMAGE4.jpg'); animation-delay: 15s; }
+
+/* ZOOM & FADE EFFECT */
+@keyframes zoomfade {
+  0% { opacity: 1; transform: scale(1); }
+  25% { opacity: 1; transform: scale(1.2); }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
+}
+
+/* MAIN CONTENT */
+#content {
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  color: #fff;
+  overflow-y: auto;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 5px;
+}
+textarea { height: 120px; }
+
+/* BUTTONS */
+button {
+  margin-top: 20px;
+  padding: 14px;
+  width: 100%;
+  background: #ff9900;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* TWO BUTTONS SIDE-BY-SIDE */
+.two-btns {
+  display: flex;
+  gap: 10px;
+}
+.two-btns button {
+  width: 50%;
+}
+
+/* WHATSAPP QUICK BUTTON */
+.wa {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px;
+  background:#25d366;
+  color:#fff;
+  text-align:center;
+  border-radius:5px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* STEPS */
+.step { display: none; }
+.step.active { display: block; }
+
+/* PROGRESS BAR */
+#progress { width:100%; height:5px; background:#333; margin-bottom:25px; }
+#bar { width:33%; height:100%; background:#ff9900; transition:.4s; }
+
+/* RESULT MODAL */
+#result {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#result.hidden { display: none; }
+
+#resultBox {
+  background: #fff;
+  color: #000;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Sending Loader */
+#sending {
+  display:none;
+  position: fixed;
+  top:20px;
+  right:20px;
+  background:#fff;
+  color:#000;
+  padding:10px 20px;
+  border-radius:5px;
+}
