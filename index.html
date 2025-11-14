@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFix Electricals — Booking</title>
+
+<!-- LINK CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("ad1dHGUf_gonZ5ERG");
+  })();
+</script>
+
+</head>
+<script src="script.js"></script>
+<body>
+
+<!-- Slideshow Background -->
+<div class="slideshow">
+  <div class="slide s1"></div>
+  <div class="slide s2"></div>
+  <div class="slide s3"></div>
+  <div class="slide s4"></div>
+</div>
+
+<!-- Dark Overlay -->
+<div class="overlay"></div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+  <!-- PROGRESS BAR -->
+  <div id="progress">
+      <div id="bar"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <section id="step1" class="step active">
+    <h1>Book Electrical Maintenance</h1>
+
+    <label>Your Full Name</label>
+    <input type="text" id="user_name" required>
+
+    <label>Your Phone Number</label>
+    <input type="text" id="user_phone" required>
+
+    <label>Type of Maintenance</label>
+    <select id="maintenance_type" required>
+      <option value="">Select</option>
+      <option>General Wiring</option>
+      <option>Lighting Repair</option>
+      <option>Socket/Outlet Fault</option>
+      <option>Full House Check-Up</option>
+    </select>
+
+    <button id="next1">Next</button>
+
+    <a id="quickwhats" class="wa">
+      Quick WhatsApp Contact
+    </a>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="step2" class="step">
+    <h1>Contact Address</h1>
+
+    <label>Enter Your House / Street Address</label>
+    <textarea id="contact_address" required></textarea>
+
+    <div class="two-btns">
+      <button id="back1">Back</button>
+      <button id="next2">Next</button>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section id="review" class="step">
+    <h1>Review Your Request</h1>
+
+    <p><b>Name:</b> <span id="r_name"></span></p>
+    <p><b>Phone:</b> <span id="r_phone"></span></p>
+    <p><b>Maintenance Type:</b> <span id="r_type"></span></p>
+    <p><b>Contact Address:</b> <span id="r_address"></span></p>
+
+    <div class="two-btns">
+      <button id="back2">Back</button>
+      <button id="confirmSend">Confirm & Send</button>
+    </div>
+  </section>
+
+  <!-- RESULT MODAL -->
+  <div id="result" class="hidden">
+      <div id="resultBox">
+          <h2 id="resultTitle"></h2>
+          <p id="resultMessage"></p>
+          <button id="backHome">Back to Home</button>
+      </div>
+  </div>
+
+  <!-- Sending loader -->
+  <div id="sending">Sending… Please wait</div>
+
+</div>
+
+<!-- LINK JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
