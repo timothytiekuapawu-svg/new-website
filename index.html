@@ -1,114 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartFix Electricals — Booking</title>
-
-<!-- LINK CSS -->
-<link rel="stylesheet" href="style.css">
-
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("ad1dHGUf_gonZ5ERG");
-  })();
-</script>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartFix electricals</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<script src="script.js"></script>
 <body>
 
-<!-- Slideshow Background -->
-<div class="slideshow">
-  <div class="slide s1"></div>
-  <div class="slide s2"></div>
-  <div class="slide s3"></div>
-  <div class="slide s4"></div>
-</div>
+<!-- Welcome Page -->
+<section id="welcomePage" class="full-screen active">
+  <video autoplay muted loop id="welcomeVideo" class="full-screen-video">
+    <source src="welcome.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+  </video>
+  <div class="welcome-overlay">
+    <h1>SmartFix Electricals</h1>
+    <button id="startBooking" class="btn btn-primary">Welcome</button>
+  </div>
+</section>
 
-<!-- Dark Overlay -->
-<div class="overlay"></div>
-
-<!-- MAIN CONTENT -->
-<div id="content">
-
-  <!-- PROGRESS BAR -->
-  <div id="progress">
-      <div id="bar"></div>
+<!-- Booking Page -->
+<main id="bookingPage" class="full-screen">
+  <!-- Slideshow -->
+  <div class="slideshow-container">
+    <img src="slide1.jpg" class="slide active">
+    <img src="slide2.jpg" class="slide">
+    <img src="slide3.jpg" class="slide">
   </div>
 
-  <!-- STEP 1 -->
-  <section id="step1" class="step active">
-    <h1>Book Electrical Maintenance</h1>
+  <div class="booking-container">
+    <header>
+      <h1>SmartFix Electricals</h1>
+    </header>
 
-    <label>Your Full Name</label>
-    <input type="text" id="user_name" required>
-
-    <label>Your Phone Number</label>
-    <input type="text" id="user_phone" required>
-
-    <label>Type of Maintenance</label>
-    <select id="maintenance_type" required>
-      <option value="">Select</option>
-      <option>General Wiring</option>
-      <option>Lighting Repair</option>
-      <option>Socket/Outlet Fault</option>
-      <option>Full House Check-Up</option>
-    </select>
-
-    <button id="next1">Next</button>
-
-    <a id="quickwhats" class="wa">
-      Quick WhatsApp Contact
-    </a>
-  </section>
-
-  <!-- STEP 2 -->
-  <section id="step2" class="step">
-    <h1>Contact Address</h1>
-
-    <label>Enter Your House / Street Address</label>
-    <textarea id="contact_address" required></textarea>
-
-    <div class="two-btns">
-      <button id="back1">Back</button>
-      <button id="next2">Next</button>
+    <div class="progress-bar">
+      <div id="prog" style="width:33%"></div>
     </div>
-  </section>
 
-  <!-- REVIEW -->
-  <section id="review" class="step">
-    <h1>Review Your Request</h1>
+    <!-- Step 1 -->
+    <section id="step1" class="step active">
+      <div class="form-left">
+        <label for="user_name">Full Name</label>
+        <input id="user_name" name="user_name" type="text" placeholder="John Doe">
 
-    <p><b>Name:</b> <span id="r_name"></span></p>
-    <p><b>Phone:</b> <span id="r_phone"></span></p>
-    <p><b>Maintenance Type:</b> <span id="r_type"></span></p>
-    <p><b>Contact Address:</b> <span id="r_address"></span></p>
+        <label for="user_phone">Phone Number</label>
+        <input id="user_phone" name="user_phone" type="tel" placeholder="+233 54 389 9210">
 
-    <div class="two-btns">
-      <button id="back2">Back</button>
-      <button id="confirmSend">Confirm & Send</button>
-    </div>
-  </section>
-
-  <!-- RESULT MODAL -->
-  <div id="result" class="hidden">
-      <div id="resultBox">
-          <h2 id="resultTitle"></h2>
-          <p id="resultMessage"></p>
-          <button id="backHome">Back to Home</button>
+        <label for="maintenance_type">Type of Maintenance</label>
+        <select id="maintenance_type" name="maintenance_type">
+          <option value="">-- Select --</option>
+          <option>Wiring fault / repair</option>
+          <option>Rewiring / new connection</option>
+          <option>Lighting / fan installation</option>
+          <option>Socket outlet installation</option>
+          <option>Fuse box / circuit breaker</option>
+          <option>Generator / inverter</option>
+          <option>Appliance connection</option>
+          <option>Solar PV / battery system</option>
+          <option>Other</option>
+        </select>
       </div>
+
+      <div class="form-right">
+        <button type="button" id="next1" class="btn btn-primary">Next ➡</button>
+        <a id="quickwhats" href="#" class="btn btn-whatsapp" target="_blank">💬 Quick WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section id="step2" class="step">
+      <label for="user_email">Email</label>
+      <input id="user_email" type="email" placeholder="you@example.com">
+
+      <label for="audience_level">Priority Level</label>
+      <select id="audience_level">
+        <option value="">-- Select Priority --</option>
+        <option>Low (Flexible)</option>
+        <option>Medium (2–3 Days)</option>
+        <option>High (Urgent)</option>
+      </select>
+
+      <label for="contact_address">Contact Address</label>
+      <input id="contact_address" type="text" placeholder="Your address">
+
+      <label for="preferred_datetime">Preferred Date & Time</label>
+      <input id="preferred_datetime" type="datetime-local">
+
+      <label for="message">Describe the Problem</label>
+      <textarea id="message" placeholder="Describe issue..."></textarea>
+
+      <div class="buttons">
+        <button id="back1" class="btn btn-ghost">⬅ Back</button>
+        <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
+      </div>
+    </section>
+
+    <!-- Step 3 / Review -->
+    <section id="review" class="step">
+      <div id="reviewBox"></div>
+      <div class="buttons">
+        <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
+        <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
+        <div id="sending" class="spinner" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Footer Info -->
+    <footer>
+      <div id="about">About Us</div>
+      <div id="electrician">What an Electrician Does</div>
+      <div id="contact">Contact Us</div>
+    </footer>
   </div>
+</main>
 
-  <!-- Sending loader -->
-  <div id="sending">Sending… Please wait</div>
-
+<!-- Result Modal -->
+<div id="resultPanel" class="result-panel">
+  <div class="result-card">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
+    <p id="countdown">Returning home in <span id="seconds">10</span>s</p>
+    <button class="btn btn-ghost" onclick="resetToHome()">🏠 Back to Home</button>
+  </div>
 </div>
 
-<!-- LINK JS -->
-<script src="script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
