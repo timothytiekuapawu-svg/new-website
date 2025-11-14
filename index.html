@@ -9,125 +9,129 @@
 <body>
 
 <!-- Welcome Page -->
-<section id="welcomePage" class="fullScreen">
+<section id="welcome">
   <video autoplay muted loop id="welcomeVideo">
-    <!-- Insert your video source here -->
     <source src="welcome.mp4" type="video/mp4">
   </video>
-  <div class="overlay"></div>
-  <div class="welcomeContent">
+  <div class="welcome-content">
     <h1>SmartFix Electricals</h1>
-    <button id="startBooking" class="btn btn-primary">Welcome</button>
+    <div id="welcomeDateTime"></div>
+    <button id="enterBooking">Welcome ➡</button>
   </div>
 </section>
 
 <!-- Booking Page -->
-<main id="bookingPage" class="fullScreen" style="display:none;">
-  <div id="slideshow" class="slideshow">
-    <!-- Insert your images here -->
-    <img src="IMAGE1.jpg" class="slide active">
-    <img src="IMAGE2.jpg" class="slide">
-    <img src="IMAGE3.jpg" class="slide">
-    <img src="IMAGE4.jpg" class="slide">
+<main id="bookingPage">
+  <!-- Slideshow Background -->
+  <div id="slideshow">
+    <img src="IMAGE1.jpg" class="slide active" alt="Slide 1">
+    <img src="IMAGE2.jpg" class="slide" alt="Slide 2">
+    <img src="IMAGE3.jpg" class="slide" alt="Slide 3">
+    <img src="IMAGE4.jpg" class="slide" alt="Slide 4">
   </div>
 
-  <div class="companyName">SmartFix Electricals</div>
+  <!-- Content Overlay -->
+  <div id="content">
+    <header><h1>SmartFix Electricals</h1></header>
 
-  <!-- Step 1 -->
-  <section id="step1" class="step active">
-    <div class="left">
-      <label for="user_name">Full Name</label>
-      <input id="user_name" type="text" placeholder="e.g., John Doe">
-      <label for="user_phone">Phone Number</label>
-      <input id="user_phone" type="tel" placeholder="+233 54 389 9210">
-      <label for="maintenance_type">Type of Maintenance</label>
-      <select id="maintenance_type">
-        <option value="">-- Select --</option>
-        <option>Wiring fault / repair</option>
-        <option>Rewiring / new connection</option>
-        <option>Lighting / fan installation</option>
-        <option>Socket outlet installation</option>
-        <option>Fuse box / circuit breaker</option>
-        <option>Generator / inverter</option>
-        <option>Appliance connection</option>
-        <option>Solar PV / battery system</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="right">
-      <button id="next1" class="btn btn-primary">Next ➡</button>
-    </div>
-  </section>
+    <!-- Step 1 -->
+    <section id="step1" class="step active">
+      <div class="step-box left">
+        <label>Full Name</label>
+        <input type="text" id="user_name" placeholder="John Doe">
+        <label>Phone</label>
+        <input type="tel" id="user_phone" placeholder="+233 54 389 9210">
+        <label>Maintenance Type</label>
+        <select id="maintenance_type">
+          <option value="">-- Select --</option>
+          <option>Wiring fault / repair</option>
+          <option>Rewiring / new connection</option>
+          <option>Lighting / fan installation</option>
+          <option>Socket outlet installation</option>
+          <option>Fuse box / circuit breaker</option>
+          <option>Generator / inverter</option>
+          <option>Appliance connection</option>
+          <option>Solar PV / battery system</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="step-box right">
+        <button id="next1">Next ➡</button>
+      </div>
+      <div class="whatsapp-btn">
+        <a id="quickwhats" href="https://api.whatsapp.com/send?phone=233543899210" target="_blank">💬 Quick WhatsApp</a>
+      </div>
+    </section>
 
-  <!-- Step 2 -->
-  <section id="step2" class="step">
-    <div class="left">
-      <label for="user_email">Email</label>
-      <input id="user_email" type="email" placeholder="you@example.com">
-      <label for="contact_address">Contact Address</label>
-      <input id="contact_address" type="text" placeholder="Your address">
-    </div>
-    <div class="right">
-      <label for="audience_level">Priority Level</label>
-      <select id="audience_level">
-        <option value="">-- Select Priority --</option>
-        <option>Low (Flexible)</option>
-        <option>Medium (2–3 Days)</option>
-        <option>High (Urgent)</option>
-      </select>
-      <label for="message">Describe the Problem</label>
-      <textarea id="message" placeholder="Describe issue..."></textarea>
-      <label for="preferred_datetime">Preferred Date & Time</label>
-      <input id="preferred_datetime" type="datetime-local">
-      <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
-    </div>
-    <div class="quickWhatsAppContainer">
-      <a href="#" id="quickwhats" class="whatsapp" target="_blank">💬 Quick WhatsApp</a>
-    </div>
-  </section>
+    <!-- Step 2 -->
+    <section id="step2" class="step">
+      <div class="step-box">
+        <label>Email</label>
+        <input type="email" id="user_email" placeholder="you@example.com">
+        <label>Priority Level</label>
+        <select id="audience_level">
+          <option value="">-- Select Priority --</option>
+          <option>Low (Flexible)</option>
+          <option>Medium (2–3 Days)</option>
+          <option>High (Urgent)</option>
+        </select>
+        <label>Contact Address</label>
+        <input type="text" id="contact_address" placeholder="Your address">
+        <label>Preferred Date & Time</label>
+        <input type="datetime-local" id="preferred_datetime">
+        <label>Description</label>
+        <textarea id="message" placeholder="Describe issue..."></textarea>
+      </div>
+      <div class="buttons">
+        <button id="back1">⬅ Back</button>
+        <button id="toReview">Review & Send ➡</button>
+      </div>
+    </section>
 
-  <!-- Step 3: Review -->
-  <section id="review" class="step">
-    <div id="reviewBox"></div>
-    <div class="reviewButtons">
-      <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
-      <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
-      <div id="sending" class="spinner" style="display:none;"></div>
-    </div>
-  </section>
+    <!-- Step 3 / Review -->
+    <section id="review" class="step">
+      <h2>Review Your Details</h2>
+      <div id="reviewBox"></div>
+      <div class="buttons">
+        <button id="editBtn">⬅ Edit</button>
+        <button id="confirmBtn">✅ Confirm & Send</button>
+        <div id="sending" style="display:none;">Sending...</div>
+      </div>
+    </section>
 
-  <!-- Result Modal -->
-  <div id="resultPanel" class="result-panel">
-    <div class="result-card">
-      <h2 id="resultTitle"></h2>
-      <p id="resultMessage"></p>
-      <p id="countdown"></p>
-      <button class="btn btn-ghost" id="manualBackBtn">🏠 Back to Home</button>
-    </div>
+    <!-- Info Sections -->
+    <section id="info">
+      <div id="about">
+        <h3>About Us</h3>
+        <p>SmartFix electricals is a professional electrical maintenance and installation service operating in Accra and surrounding areas. We handle residential and light commercial electrical work with focus on safety and reliability.</p>
+      </div>
+      <div id="electrician">
+        <h3>What an Electrician Does</h3>
+        <ul>
+          <li>Diagnose and repair wiring faults and electrical equipment.</li>
+          <li>Install/replace sockets, switches, lights, fans.</li>
+          <li>Design and implement rewiring for renovations.</li>
+          <li>Maintain generators, inverters, solar PV systems.</li>
+        </ul>
+      </div>
+      <div id="contact">
+        <h3>Contact Us</h3>
+        <p>Call/WhatsApp: +233 54 389 9210</p>
+        <p>Email: timothytiekuapawu@gmail.com</p>
+      </div>
+    </section>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-left">
-      <h3>About Us</h3>
-      <p>SmartFix electricals provides fast, trusted, and professional electrical services.</p>
-    </div>
-    <div class="footer-center">
-      <h3>What an Electrician Does</h3>
-      <ul>
-        <li>Repair wiring faults</li>
-        <li>Install lights, sockets, and fans</li>
-        <li>Fuse box & circuit breaker services</li>
-        <li>Generators & Solar PV</li>
-      </ul>
-    </div>
-    <div class="footer-right">
-      <h3>Contact Us</h3>
-      <p>Phone: +233 54 389 9210</p>
-      <p>Email: timothytiekuapawu@gmail.com</p>
-    </div>
-  </footer>
 </main>
+
+<!-- Result Modal -->
+<div id="resultPanel">
+  <div id="resultCard">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
+    <div id="countdown"></div>
+    <button id="backHome">🏠 Back to Home</button>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="script.js"></script>
