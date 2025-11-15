@@ -1,30 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SmartFix Electricals — Welcome</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFix Electricals — Booking</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Video Background (file: welcome.mp4 in repo root) -->
+
+<!-- WELCOME PAGE -->
+<section id="welcomePage" class="page active">
   <video autoplay muted loop id="welcomeVideo" class="full-bg-video">
-    <source src="welcome.mp4" type="video/mp4">
+    <source src="video/welcome.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
-
-  <!-- Dim overlay so text is readable -->
   <div class="overlay"></div>
+  <div class="welcome-content">
+    <h1>SmartFix Electricals</h1>
+    <div id="liveDateTime" class="datetime"></div>
+    <button id="welcomeBtn" class="btn btn-primary">Welcome</button>
+  </div>
+</section>
 
-  <!-- Centered welcome card -->
-  <div class="welcome-card" role="main" aria-label="Welcome">
-    <h1 class="company-title">SmartFix Electricals</h1>
-    <div id="liveDateTime" class="datetime" aria-live="polite"></div>
-    <div class="welcome-actions">
-      <button id="welcomeBtn" class="btn btn-primary">Welcome ➜</button>
-    </div>
+<!-- BOOKING PAGE -->
+<main id="bookingPage" class="page">
+
+  <!-- Slideshow background -->
+  <div id="slideshow" class="slideshow">
+    <img src="IMAGE1.jpg" class="slide active">
+    <img src="IMAGE2.jpg" class="slide">
+    <img src="IMAGE3.jpg" class="slide">
+    <img src="IMAGE4.jpg" class="slide">
   </div>
 
-  <script src="script.js"></script>
+  <header class="header">
+    <h1>SmartFix Electricals</h1>
+  </header>
+
+  <!-- STEP 1 -->
+  <section id="step1" class="step active">
+    <div class="step-content">
+      <div class="inputs-left">
+        <label for="user_name">Full Name</label>
+        <input id="user_name" type="text" placeholder="John Doe" required>
+
+        <label for="user_phone">Phone Number</label>
+        <input id="user_phone" type="tel" placeholder="+233 54 389 9210" required>
+
+        <label for="maintenance_type">Type of Maintenance</label>
+        <select id="maintenance_type" required>
+          <option value="">-- Select --</option>
+          <option>Wiring fault / repair</option>
+          <option>Rewiring / new connection</option>
+          <option>Lighting / fan installation</option>
+          <option>Socket outlet installation</option>
+          <option>Fuse box / circuit breaker</option>
+          <option>Generator / inverter</option>
+          <option>Appliance connection</option>
+          <option>Solar PV / battery system</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="actions-right">
+        <button id="next1" class="btn btn-primary">Next ➡</button>
+      </div>
+    </div>
+    <div class="bottom-center">
+      <a id="quickwhats" href="#" class="whatsapp" target="_blank">💬 Quick WhatsApp</a>
+    </div>
+    <div class="bottom-right">
+      <button id="backWelcome" class="btn btn-ghost">⬅ Back to Welcome</button>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="step2" class="step">
+    <div class="step-content">
+      <label for="user_email">Email</label>
+      <input id="user_email" type="email" placeholder="you@example.com" required>
+
+      <label for="audience_level">Priority Level</label>
+      <select id="audience_level" required>
+        <option value="">-- Select Priority --</option>
+        <option>Low (Flexible)</option>
+        <option>Medium (2–3 Days)</option>
+        <option>High (Urgent)</option>
+      </select>
+
+      <label for="contact_address">Contact Address</label>
+      <input id="contact_address" type="text" placeholder="Your address" required>
+
+      <label for="preferred_datetime">Preferred Date & Time</label>
+      <input id="preferred_datetime" type="datetime-local">
+
+      <label for="message">Describe the Problem</label>
+      <textarea id="message" placeholder="Describe issue..."></textarea>
+    </div>
+    <div class="step-buttons">
+      <button id="back1" class="btn btn-ghost">⬅ Back</button>
+      <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
+    </div>
+  </section>
+
+  <!-- STEP 3 - REVIEW -->
+  <section id="step3" class="step">
+    <div id="reviewBox" class="review-box"></div>
+    <div class="step-buttons">
+      <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
+      <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
+      <div id="sending" style="display:none;" class="spinner"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT / INFO -->
+  <section class="info-section">
+    <div class="about-us">
+      <h3>About SmartFix Electricals</h3>
+      <p>Professional electrical maintenance in Accra and surrounding areas...</p>
+    </div>
+    <div class="what-electrician-does">
+      <h3>What an Electrician Does</h3>
+      <ul>
+        <li>Diagnose and repair wiring faults</li>
+        <li>Install sockets, switches, lights, fans</li>
+        <li>Rewiring for additions/renovations</li>
+        <li>Generators, inverters, solar PV</li>
+      </ul>
+    </div>
+    <div class="contact-us">
+      <h3>Contact Us</h3>
+      <p>Phone: +233 54 389 9210</p>
+      <p>Email: timothytiekuapawu@gmail.com</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- RESULT / REQUEST SENT PAGE -->
+<section id="resultPage" class="page">
+  <div class="slideshow blur-bg">
+    <img src="images/IMAGE1.jpg" class="slide active">
+    <img src="images/IMAGE2.jpg" class="slide">
+    <img src="images/IMAGE3.jpg" class="slide">
+    <img src="images/IMAGE4.jpg" class="slide">
+  </div>
+  <div class="overlay"></div>
+  <div class="result-content">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
+    <p id="countdownText"></p>
+    <button id="backHomeBtn" class="btn btn-ghost">🏠 Back to Home</button>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
