@@ -1,69 +1,63 @@
-/* ============================
-   Shared helpers & DOM ready
-   ============================ */
 document.addEventListener('DOMContentLoaded', ()=>{
 
-  /* --------- Welcome page logic --------- */
+  /* ============ Welcome page ============ */
   const welcomeBtn = document.getElementById('welcomeBtn');
-  const liveDateTime = document.getElementById('liveDateTime');
-
+  const dateEl = document.getElementById('liveDateTime');
+  if(dateEl){
+    const tick = ()=> dateEl.innerText = new Date().toLocaleString();
+    tick();
+    setInterval(tick, 1000);
+  }
   if(welcomeBtn){
     welcomeBtn.addEventListener('click', ()=> location.href = 'booking.html');
   }
-  if(liveDateTime){
-    const update = ()=> liveDateTime.innerText = new Date().toLocaleString();
-    update();
-    setInterval(update, 1000);
-  }
 
-  /* --------- Slideshow (booking page) --------- */
+  /* ============ Slideshow ============ */
   const slides = Array.from(document.querySelectorAll('.slide'));
-  let current = 0;
-  function showSlide(index){
-    if(slides.length===0) return;
-    slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+  let idx = 0;
+  function showSlide(i){
+    if(slides.length === 0) return;
+    slides.forEach((s, n)=> s.classList.toggle('active', n === i));
   }
-  if(slides.length>0){
-    showSlide(current);
-    setInterval(()=>{ current = (current+1) % slides.length; showSlide(current); }, 10000); // 10s
+  if(slides.length > 0){
+    showSlide(idx);
+    setInterval(()=>{ idx = (idx + 1) % slides.length; showSlide(idx); }, 10000);
   }
 
-  /* --------- Booking steps elements --------- */
+  /* ============ Steps logic ============ */
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
   const review = document.getElementById('review');
 
-  // Step1 -> next
+  // Step1 next
   document.getElementById('next1')?.addEventListener('click', ()=>{
-    const name = document.getElementById('user_name').value.trim();
-    const phone = document.getElementById('user_phone').value.trim();
-    const type = document.getElementById('maintenance_type').value;
-    if(!name || !phone || !type){
+    const n = document.getElementById('user_name').value.trim();
+    const p = document.getElementById('user_phone').value.trim();
+    const t = document.getElementById('maintenance_type').value;
+    if(!n || !p || !t){
       alert('Please fill Full Name, Phone and Maintenance Type.');
       return;
     }
-    step1.classList.remove('active');
-    step2.classList.add('active');
-    step2.scrollIntoView({behavior:'smooth'});
+    step1.classList.remove('active'); step2.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // Back to welcome from step1
+  // Back to welcome
   document.getElementById('backToWelcome')?.addEventListener('click', ()=> location.href = 'index.html');
 
-  // Step2 -> back
+  // Step2 back
   document.getElementById('back1')?.addEventListener('click', ()=>{
-    step2.classList.remove('active');
-    step1.classList.add('active');
-    step1.scrollIntoView({behavior:'smooth'});
+    step2.classList.remove('active'); step1.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // Step2 -> Review
+  // Step2 to review
   document.getElementById('toReview')?.addEventListener('click', ()=>{
     const email = document.getElementById('user_email').value.trim();
     const priority = document.getElementById('audience_level').value;
     const address = document.getElementById('contact_address').value.trim();
     if(!email || !priority || !address){
-      alert('Please fill Email, Priority and Contact Address before reviewing.');
+      alert('Please fill Email, Priority and Contact Address.');
       return;
     }
 
@@ -78,37 +72,31 @@ document.addEventListener('DOMContentLoaded', ()=>{
       contact_address: address
     };
 
-    // Save to session so confirm button can get it
     window.sessionStorage.setItem('smartfix_booking', JSON.stringify(data));
 
-    // Render review box
     const reviewBox = document.getElementById('reviewBox');
-    if(reviewBox){
-      reviewBox.innerHTML = `
-        <div><strong>Name:</strong> ${escapeHtml(data.user_name)}</div>
-        <div><strong>Phone:</strong> ${escapeHtml(data.user_phone)}</div>
-        <div><strong>Maintenance Type:</strong> ${escapeHtml(data.maintenance_type)}</div>
-        <div><strong>Email:</strong> ${escapeHtml(data.user_email)}</div>
-        <div><strong>Priority:</strong> ${escapeHtml(data.audience_level)}</div>
-        <div><strong>Preferred Date & Time:</strong> ${escapeHtml(data.preferred_datetime || 'Not specified')}</div>
-        <div><strong>Address:</strong> ${escapeHtml(data.contact_address)}</div>
-        <div><strong>Description:</strong> ${escapeHtml(data.message || 'No description provided')}</div>
-      `;
-    }
+    reviewBox.innerHTML = `
+      <div><strong>Name:</strong> ${escapeHtml(data.user_name)}</div>
+      <div><strong>Phone:</strong> ${escapeHtml(data.user_phone)}</div>
+      <div><strong>Maintenance Type:</strong> ${escapeHtml(data.maintenance_type)}</div>
+      <div><strong>Email:</strong> ${escapeHtml(data.user_email)}</div>
+      <div><strong>Priority:</strong> ${escapeHtml(data.audience_level)}</div>
+      <div><strong>Preferred Date & Time:</strong> ${escapeHtml(data.preferred_datetime || 'Not specified')}</div>
+      <div><strong>Address:</strong> ${escapeHtml(data.contact_address)}</div>
+      <div><strong>Description:</strong> ${escapeHtml(data.message || 'No description provided')}</div>
+    `;
 
-    step2.classList.remove('active');
-    review.classList.add('active');
-    review.scrollIntoView({behavior:'smooth'});
+    step2.classList.remove('active'); review.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // Edit back to step2
+  // Edit (back to step2)
   document.getElementById('editBtn')?.addEventListener('click', ()=>{
-    review.classList.remove('active');
-    step2.classList.add('active');
-    step2.scrollIntoView({behavior:'smooth'});
+    review.classList.remove('active'); step2.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  /* Quick WhatsApp dynamic link */
+  /* ============ Quick WhatsApp dynamic update ============ */
   ['user_name','user_phone','maintenance_type'].forEach(id=>{
     const el = document.getElementById(id);
     el?.addEventListener('input', ()=>{
@@ -121,109 +109,81 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  /* --------- Confirm & Send (EmailJS) --------- */
-  // Initialize EmailJS - replace placeholders with your IDs
+  /* ============ EmailJS send & result page ============ */
+  // Init EmailJS (replace with your public user key)
   if(typeof emailjs !== 'undefined'){
-    try{
-      emailjs.init('ad1dHGUf_gonZ5ERG'); // <-- replace with your EmailJS public key
-    }catch(e){
-      console.warn('EmailJS init error:', e);
-    }
+    try{ emailjs.init('ad1dHGUf_gonZ5ERG'); }catch(e){ console.warn('EmailJS init failed',e); }
   }
 
   document.getElementById('confirmBtn')?.addEventListener('click', ()=>{
     const raw = window.sessionStorage.getItem('smartfix_booking');
-    if(!raw){
-      alert('No booking data. Please review your form.');
-      return;
-    }
+    if(!raw){ alert('No booking found.'); return; }
     const params = JSON.parse(raw);
 
     // show spinner
-    const sending = document.getElementById('sending');
-    if(sending) sending.style.display = '';
+    const spinner = document.getElementById('sending');
+    if(spinner) spinner.style.display = '';
 
-    // if emailjs not present, simulate success
+    // If emailjs not available, simulate success
     if(typeof emailjs === 'undefined' || !emailjs.send){
-      setTimeout(()=>{
-        if(sending) sending.style.display = 'none';
-        showResultPage(true, 'Thanks for booking with SmartFix. We will contact you soon.');
-        window.sessionStorage.removeItem('smartfix_booking');
-      }, 900);
+      setTimeout(()=>{ if(spinner) spinner.style.display='none'; showResult(true, 'Thanks for booking with SmartFix. We will contact you soon.'); window.sessionStorage.removeItem('smartfix_booking'); }, 900);
       return;
     }
 
-    // send via EmailJS - replace SERVICE ID and TEMPLATE ID
+    // send with emailjs (replace service/template)
     emailjs.send('service_972cf37','template_3epza38', params)
-      .then(()=>{
-        if(sending) sending.style.display = 'none';
-        showResultPage(true, 'Thanks for booking with SmartFix. We will contact you soon.');
-        window.sessionStorage.removeItem('smartfix_booking');
-      })
-      .catch((err)=>{
-        console.error('EmailJS error:', err);
-        if(sending) sending.style.display = 'none';
-        showResultPage(false, 'There was an error sending your request. Please try again.');
-      });
+      .then(()=>{ if(spinner) spinner.style.display='none'; showResult(true, 'Thanks for booking with SmartFix. We will contact you soon.'); window.sessionStorage.removeItem('smartfix_booking'); })
+      .catch((err)=>{ console.error('EmailJS error', err); if(spinner) spinner.style.display='none'; showResult(false, 'There was an error sending your request. Please try again.'); });
+
   });
 
-  /* --------- Result / Count-down / Back to Home --------- */
+  /* Result page & countdown */
   const resultPage = document.getElementById('resultPage');
   const resultTitle = document.getElementById('resultTitle');
   const resultMessage = document.getElementById('resultMessage');
-  const countdownEl = document.getElementById('countdown');
+  const countdownText = document.getElementById('countdownText');
+  let timer = null;
 
-  let countdownTimer = null;
-  function showResultPage(success, message){
+  function showResult(success, message){
     if(!resultPage) return;
     resultTitle.innerText = success ? '✅ Request Sent' : '❌ Submission Failed';
     resultMessage.innerText = message;
     resultPage.classList.add('active');
     resultPage.setAttribute('aria-hidden','false');
 
-    // start countdown to reset to step1
     let seconds = 10;
-    if(countdownEl) countdownEl.innerText = `Returning to home in ${seconds} seconds...`;
-    countdownTimer = setInterval(()=>{
+    if(countdownText) countdownText.innerText = `Returning to home in ${seconds} seconds...`;
+    timer = setInterval(()=>{
       seconds--;
-      if(countdownEl) countdownEl.innerText = `Returning to home in ${seconds} seconds...`;
+      if(countdownText) countdownText.innerText = `Returning to home in ${seconds} seconds...`;
       if(seconds <= 0){
-        clearInterval(countdownTimer);
+        clearInterval(timer);
         resetToStep1();
       }
     }, 1000);
   }
 
-  // Manual back
   document.getElementById('manualBack')?.addEventListener('click', ()=>{
-    if(countdownTimer) clearInterval(countdownTimer);
+    if(timer) clearInterval(timer);
     resetToStep1();
   });
 
   function resetToStep1(){
     // hide result
-    if(resultPage) { resultPage.classList.remove('active'); resultPage.setAttribute('aria-hidden','true'); }
+    if(resultPage){ resultPage.classList.remove('active'); resultPage.setAttribute('aria-hidden','true'); }
     // reset steps
     step1.classList.add('active');
     step2.classList.remove('active');
     review.classList.remove('active');
-
-    // clear fields (optional: keep some if you want)
-    const fields = ['user_name','user_phone','maintenance_type','user_email','audience_level','contact_address','preferred_datetime','message'];
-    fields.forEach(id => {
-      const el = document.getElementById(id);
-      if(!el) return;
-      if(el.tagName === 'SELECT' || el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = '';
+    // clear inputs
+    ['user_name','user_phone','maintenance_type','user_email','audience_level','contact_address','preferred_datetime','message'].forEach(id=>{
+      const el = document.getElementById(id); if(!el) return; el.value = '';
     });
     window.sessionStorage.removeItem('smartfix_booking');
-    // scroll to top
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  /* escape helper */
-  function escapeHtml(s){
-    if(!s) return '';
-    return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-  }
+  /* small helper */
+  function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
 
-}); // DOMContentLoaded end
+}); // DOMContentLoaded
