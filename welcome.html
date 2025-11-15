@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFix Electricals — Welcome</title>
+
+<!-- Correct CSS Path -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Video Background -->
+<video autoplay muted loop id="welcomeVideo" class="full-bg-video">
+    <source src="video/welcome.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+
+<!-- Dark Overlay -->
+<div class="overlay"></div>
+
+<!-- Welcome Content -->
+<div class="welcome-content">
+    <h1>SmartFix Electricals</h1>
+    <div id="liveDateTime" class="datetime"></div>
+
+    <!-- Button to go to Step 1 -->
+    <button id="welcomeBtn" class="btn btn-primary"
+            onclick="window.location.href='booking.html'">
+        Welcome
+    </button>
+</div>
+
+<!-- Correct JS Path -->
+<script src="script.js"></script>
+</body>
+</html>
