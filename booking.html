@@ -1,117 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartFix Electricals — Booking</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartFix Electricals — Booking</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Slideshow Background -->
-<div class="slideshow-container">
-  <div class="slide" style="background-image:url('IMAGE1.jpg')"></div>
-  <div class="slide" style="background-image:url('IMAGE2.jpg')"></div>
-  <div class="slide" style="background-image:url('IMAGE3.jpg')"></div>
-  <div class="slide" style="background-image:url('IMAGE4.jpg')"></div>
-</div>
-
-<div class="overlay"></div>
-
-<!-- Booking Content -->
-<main class="booking-container">
-
-  <!-- Step 1 -->
-  <section id="step1" class="step active">
-    <h2>Step 1 — Your Info</h2>
-    <div class="step-content">
-      <div class="left">
-        <label>Full Name</label>
-        <input type="text" id="user_name" required placeholder="John Doe">
-        <label>Phone</label>
-        <input type="tel" id="user_phone" required placeholder="+233 54 389 9210">
-        <label>Type of Maintenance</label>
-        <select id="maintenance_type" required>
-          <option value="">-- Select --</option>
-          <option>Wiring fault / repair</option>
-          <option>Rewiring / new connection</option>
-          <option>Lighting / fan installation</option>
-          <option>Socket outlet installation</option>
-          <option>Fuse box / circuit breaker</option>
-          <option>Generator / inverter</option>
-          <option>Appliance connection</option>
-          <option>Solar PV / battery system</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="right">
-        <button class="btn btn-primary" id="next1">Next ➡</button>
-        <button class="btn btn-ghost" id="backWelcome">⬅ Back to Welcome</button>
-      </div>
-    </div>
-    <div class="whatsapp-center">
-      <a id="quickwhats" href="#" target="_blank" class="btn btn-whatsapp">💬 Quick WhatsApp</a>
-    </div>
-  </section>
-
-  <!-- Step 2 -->
-  <section id="step2" class="step">
-    <h2>Step 2 — Job Details</h2>
-    <div class="step-content">
-      <label>Email</label>
-      <input type="email" id="user_email" required placeholder="you@example.com">
-      <label>Priority</label>
-      <select id="audience_level" required>
-        <option value="">-- Select Priority --</option>
-        <option>Low (Flexible)</option>
-        <option>Medium (2–3 Days)</option>
-        <option>High (Urgent)</option>
-      </select>
-      <label>Contact Address</label>
-      <input type="text" id="contact_address" required placeholder="Your address">
-      <label>Preferred Date & Time</label>
-      <input type="datetime-local" id="preferred_datetime">
-      <label>Describe the Problem</label>
-      <textarea id="message" placeholder="Describe issue..."></textarea>
-    </div>
-    <div class="step-buttons">
-      <button class="btn btn-ghost" id="back1">⬅ Back</button>
-      <button class="btn btn-primary" id="toReview">Review & Send ➡</button>
-    </div>
-  </section>
-
-  <!-- Step 3 — Review -->
-  <section id="review" class="step">
-    <h2>Step 3 — Review</h2>
-    <div id="reviewBox" class="review-box"></div>
-    <div class="step-buttons">
-      <button class="btn btn-ghost" id="editBtn">⬅ Edit</button>
-      <button class="btn btn-primary" id="confirmBtn">✅ Confirm & Send</button>
-      <div id="sending" style="display:none"><div class="spinner"></div></div>
-    </div>
-  </section>
-
-  <!-- Footer Info -->
-  <footer>
-    <div class="footer-info">
-      <div class="about"><h3>About Us</h3><p>SmartFix electricals is a professional electrical service operating in Accra and surrounding areas.</p></div>
-      <div class="electrician"><h3>What an Electrician Does</h3><ul><li>Diagnose and repair wiring faults.</li><li>Install sockets, switches, lights.</li><li>Rewiring & renovations.</li><li>Maintain generators & solar PV.</li></ul></div>
-      <div class="contactus"><h3>Contact Us</h3><p>Call: +233 54 389 9210<br>Email: timothytiekuapawu@gmail.com</p></div>
-    </div>
-  </footer>
-</main>
-
-<!-- Result Modal -->
-<div id="resultPanel" class="result-panel">
-  <div class="result-card">
-    <h2 id="resultTitle"></h2>
-    <p id="resultMessage"></p>
-    <p id="countdownText"></p>
-    <button class="btn btn-ghost" id="backHomeBtn">🏠 Back to Home</button>
+  <!-- Slideshow background using your 4 images in repo root -->
+  <div class="slideshow-container" id="slideshow">
+    <div class="slide" style="background-image:url('IMAGE1.jpg')"></div>
+    <div class="slide" style="background-image:url('IMAGE2.jpg')"></div>
+    <div class="slide" style="background-image:url('IMAGE3.jpg')"></div>
+    <div class="slide" style="background-image:url('IMAGE4.jpg')"></div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="js/script.js"></script>
+  <div class="overlay"></div>
+
+  <!-- Main fixed content over slideshow -->
+  <main class="booking-container" role="main">
+    <header class="topbar">
+      <div class="company-top">SmartFix Electricals</div>
+      <div class="top-contact">Call / WhatsApp: <a href="tel:+233543899210">+233 54 389 9210</a></div>
+    </header>
+
+    <!-- STEP 1 -->
+    <section id="step1" class="step active" aria-label="Step 1">
+      <h2>Step 1 — Your Details</h2>
+      <div class="step-grid">
+        <div class="left-col">
+          <label for="user_name">Full Name</label>
+          <input id="user_name" type="text" placeholder="John Doe">
+
+          <label for="user_phone">Phone Number</label>
+          <input id="user_phone" type="tel" placeholder="+233 54 389 9210">
+
+          <label for="maintenance_type">Type of Maintenance</label>
+          <select id="maintenance_type">
+            <option value="">-- Select --</option>
+            <option>Wiring fault / repair</option>
+            <option>Rewiring / new connection</option>
+            <option>Lighting / fan installation</option>
+            <option>Socket outlet installation</option>
+            <option>Fuse box / circuit breaker</option>
+            <option>Generator / inverter</option>
+            <option>Appliance connection</option>
+            <option>Solar PV / battery system</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="right-col">
+          <div class="next-area">
+            <button id="next1" class="btn btn-primary">Next ➡</button>
+            <button id="backToWelcome" class="btn btn-ghost">🏠 Back to Welcome</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="whatsapp-row">
+        <a id="quickwhats" class="btn btn-whatsapp" href="#" target="_blank">💬 Quick WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="step2" class="step" aria-label="Step 2">
+      <h2>Step 2 — Job Details</h2>
+
+      <div class="step-grid">
+        <div class="left-col">
+          <label for="user_email">Email</label>
+          <input id="user_email" type="email" placeholder="you@example.com">
+
+          <label for="audience_level">Priority Level</label>
+          <select id="audience_level">
+            <option value="">-- Select Priority --</option>
+            <option>Low (Flexible)</option>
+            <option>Medium (2–3 Days)</option>
+            <option>High (Urgent)</option>
+          </select>
+        </div>
+
+        <div class="right-col">
+          <label for="contact_address">Contact Address</label>
+          <input id="contact_address" type="text" placeholder="Your address">
+
+          <label for="preferred_datetime">Preferred Date & Time</label>
+          <input id="preferred_datetime" type="datetime-local">
+        </div>
+      </div>
+
+      <div class="full-width">
+        <label for="message">Describe the Problem</label>
+        <textarea id="message" placeholder="Describe issue..."></textarea>
+      </div>
+
+      <div class="step-buttons">
+        <button id="back1" class="btn btn-ghost">⬅ Back</button>
+        <button id="toReview" class="btn btn-primary">Review & Send ➡</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: REVIEW -->
+    <section id="review" class="step" aria-label="Review">
+      <h2>Step 3 — Review & Confirm</h2>
+      <div id="reviewBox" class="review-box"></div>
+
+      <div class="step-buttons">
+        <button id="editBtn" class="btn btn-ghost">⬅ Edit</button>
+        <button id="confirmBtn" class="btn btn-primary">✅ Confirm & Send</button>
+        <div id="sending" class="spinner" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- bottom info blocks -->
+    <footer class="bottom-info">
+      <div class="info-left">
+        <h3>About Us</h3>
+        <p>SmartFix electricals is a professional electrical maintenance and installation service operating in Accra and surrounding areas.</p>
+      </div>
+      <div class="info-mid">
+        <h3>What an Electrician Does</h3>
+        <ul>
+          <li>Diagnose and repair wiring faults</li>
+          <li>Install sockets, switches, lights and fans</li>
+          <li>Rewiring for renovations</li>
+          <li>Generators, inverters & solar systems</li>
+        </ul>
+      </div>
+      <div class="info-right">
+        <h3>Contact Us</h3>
+        <p>Phone / WhatsApp: +233 54 389 9210</p>
+        <p>Email: timothytiekuapawu@gmail.com</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- RESULT PAGE (Full-screen modal-like page with blur) -->
+  <div id="resultPage" class="result-page" aria-hidden="true">
+    <div class="result-card">
+      <h2 id="resultTitle"></h2>
+      <p id="resultMessage"></p>
+      <p id="countdown" class="countdown"></p>
+      <div style="margin-top:14px">
+        <button id="manualBack" class="btn btn-ghost">🏠 Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
